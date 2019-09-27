@@ -1,0 +1,53 @@
+{
+    "rules": {
+        "arrow-spacing": "error",
+        "brace-style": "error",
+        "comma-spacing": ["error", {
+            "after": true,
+            "before": false
+        }],
+        "computed-property-spacing": ["error", "never"],
+        "indent": ["error", 4, {
+            "SwitchCase": 1
+        }],
+        "key-spacing": ["error", {
+            "afterColon": true
+        }],
+        "keyword-spacing": "error",
+        "no-console": "warn",
+        "no-control-regex": "off",
+        "no-multi-spaces": "error",
+        "no-multiple-empty-lines": ["error", {
+            "max": 1,
+            "maxEOF": 1
+        }],
+        "no-nested-ternary": "error",
+        "no-trailing-spaces": "error",
+        "no-unneeded-ternary": "error",
+        "no-useless-escape": "off",
+        "object-curly-spacing": ["warn", "always"],
+        "padded-blocks": ["error", {
+            "classes": "never"
+        }],
+        "prefer-const": "error",
+        "quotes": ["warn", "single"],
+        "semi": "error",
+        "space-before-blocks": "error",
+        "space-infix-ops": ["error", {
+            "int32Hint": false
+        }]
+    },
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended"],
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2018,
+        "ecmaFeatures": {
+            "classes": true,
+            "jsx": true
+        }
+    }
+}
