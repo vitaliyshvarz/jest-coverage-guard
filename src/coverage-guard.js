@@ -153,7 +153,7 @@ class CoverageGuard {
 
     finalizeCoverage() {
         if (this.errorTable.containsErrors) {
-            console.error(RED_BG_LOG_ERR, 'You failed go to GULAG!');
+            console.error(RED_BG_LOG_ERR, 'You failed coverage!');
 
             // we should fail only if not in watch mode
             if (!this.isWatchMode) {
