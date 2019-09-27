@@ -25,62 +25,63 @@
 
     ```json
     {
-		"appRoot": "src",
-		"excludeKeywords": [
-			"// skip-coverage-check",
-			"backbone",
-			"class SomeUglyClass"
-		],
-		"featureNameRegExp": {
-			"body": "APP-[0-9]+",
-			"flags": "g"
-		},
-		"excludeFiles": [ "-test.js", ".less"],
-		"addedFilesQualityGate": {
-			"statements": 100,
-			"branches": 100,
-			"functions": 100,
-			"lines": 100
-		},
-		"changedFilesQualityGate": {
-			"statements": 80,
-			"branches": 80,
-			"functions": 80,
-			"lines": 80
-		}
+      "appRoot": "src",
+      "excludeKeywords": [
+        "// skip-coverage-check",
+        "backbone",
+        "class SomeUglyClass"
+      ],
+      "featureNameRegExp": {
+        "body": "APP-[0-9]+",
+        "flags": "g"
+      },
+      "excludeFiles": [ "-test.js", ".less"],
+      "addedFilesQualityGate": {
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+      },
+      "changedFilesQualityGate": {
+        "statements": 80,
+        "branches": 80,
+        "functions": 80,
+        "lines": 80
+      }
     }
     ```
-
-Config options:
-	 **`appRoot`**  - path to your application source code
-	**`excludeKeywords`** - keywords that will be used to skip a file from coverage. If a file contains one of the keywords the coverage check script will ignore this file.
-	**`featureNameRegExp`** - patters to search commits by commit message. Assuming you are adding in each commit message a issue/ticket number the the beginning. e.g: 'APP-12345 fixed a nasty bug'
-	**`excludeFiles`** - array of file extensions that should be ignored from check
-	**`addedFilesQualityGate`** - config object where you specify quality gate for newly added files, defaults to:
-```json
-	{
-      "statements": 100,
-      "branches": 100,
-      "functions": 100,
-      "lines": 100
-	}
-```
-
-   **`changedFilesQualityGate`** - config object where you specify quality gate for changed  files, defaults to:
-```json
-	{
-      "statements": 80,
-      "branches": 80,
-      "functions": 80,
-      "lines": 80
-	}
-```
-
 
 2. In your jest config file `jest.config.json` add jest-coverage-guard as a reporter:
     `"reporters": ["default", "./node_modules/jest-coverage-guard"],`
 
 4. Run jest tests
+
+
+#### Config options
+
+* **`appRoot`**  - path to your application source code
+* **`excludeKeywords`** - keywords that will be used to skip a file from coverage. If a file contains one of the keywords the coverage check script will ignore this file.
+* **`featureNameRegExp`** - patters to search commits by commit message. Assuming you are adding in each commit message a issue/ticket number the the beginning. e.g: 'APP-12345 fixed a nasty bug'
+* **`excludeFiles`** - array of file extensions that should be ignored from check
+* **`addedFilesQualityGate`** - config object where you specify quality gate for newly added files, defaults to:
+```json
+{
+  "statements": 100,
+  "branches": 100,
+  "functions": 100,
+  "lines": 100
+}
+```
+
+* **`changedFilesQualityGate`** - config object where you specify quality gate for changed  files, defaults to:
+```json
+{
+  "statements": 80,
+  "branches": 80,
+  "functions": 80,
+  "lines": 80
+}
+```
 
 ## Why use it?
 
@@ -119,6 +120,6 @@ Config options:
   13. if error table contain no errors - pipeline will succeed
 
   NEXT STEPS ONLY LOCALLY:
-	  14. gets current git.status Object
-	  15. gets all files that you have changed but not yet committed
-	  16. gets file URL's and then does everything from step 5 to 12
+  14. gets current git.status Object
+  15. gets all files that you have changed but not yet committed
+  16. gets file URL's and then does everything from step 5 to 12
