@@ -15,7 +15,7 @@
     "coverage"
   ],
   "author": "Vitaliy Shvarz",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/vitaliyshvarz/jest-coverage-guard/issues"
   },
