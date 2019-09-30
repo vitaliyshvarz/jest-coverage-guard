@@ -86,8 +86,8 @@
 
 ## Why use it?
 
+ You can use this to fail your CI pipeline when code coverage is not good enough.
  This script should be executed only after jest generated the coverage report!
-
  This script with check your committed and uncommitted files
 
  This script is checking code coverage in
@@ -127,7 +127,3 @@
   16. gets current git.status Object
   17. gets all files that you have changed but not yet committed
   18. gets file URL's and then does everything from step 6 to 15
-
-### Why use this:
-
-You can use this to fail your CI pipeline when code coverage is not good enough.
