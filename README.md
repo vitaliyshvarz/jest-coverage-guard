@@ -1,7 +1,8 @@
 
 # Jest Coverage Guard
 
-> Fail pipelines when coverage quility fails
+> Coverage quality guard, will fail your tests if coverage of files you have changes is not good enough
+> Will trow an error if files you have changed locally or in previous commits are not meeting quality gate conditions
 
 ## Usage
 
@@ -97,7 +98,7 @@
   implementing current feature and all files that you are currently working with
   but not yet committed.
 
-  In gitlab CI it will only check files that you have changed and committed
+  In CI environment it will only check files that you have changed and committed
   for this feature
 
   If you want to exclude your file from coverage_check for some reason:
@@ -105,21 +106,28 @@
 
   ### How does it work:
 
-  1. Script gets the name of the current branch you are working on
-  2. extracts the ticket number from the branch name eg. APP-12345
-  3. gets all commits the contain this ticket number in the message
-  4. get all urls of the files you have changed in those commits
-  5. filters the file URL's to get only app files and skips the files that contain this.config.excludeKeywords
-  6. iterates trough all file urls and searches for a corresponding report in coverageResults   -- if the report found - get the report data   -- if the report is not found
-  7. after the report data is extracted, it compares the results with corresponding quality gate constant
-  8. adds result of file comparison to the results table
-  9. adds result errors to the errors table (if the file failed to pass)
-  10. shows the result table
-  11. shows errors table
-  12. if error table contains errors - fail the script with exit code 1 (Pipeline failed)
-  13. if error table contain no errors - pipeline will succeed
+  1. The script assumes that you are working with a project management software where you have ticket/issue
+	numbers that are appended or included in every commit message, eg: "APP-12345 fixed typo in awesomefile.js"
+  2. Script gets the name of the current branch you are working on (config: featureNameRegExp)
+  3. extracts the ticket number from the branch name eg. APP-12345 (cconfig: featureNameRegExp)
+  4. gets all commits the contain this ticket number in the message
+  5. get all urls of the files you have changed in those commits
+  6. filters the file URL's to get only app files (config: appRoot) and skips the files that contain (config: excludeKeywords)
+  7. iterates trough all file urls and searches for a corresponding report in coverageResults that jest generated
+  8. after the coverage report data is extracted, it compares the results with corresponding quality gate mask
+  9. adds results to results table
+  10. adds failed coverage errors to the errors table
+  11. shows the result table
+  12. shows errors table
+  13. if error table contains errors - fail the script with exit code 1
+	14. if error table contains error but you are locally in --watch or --watchAll mode - script will not fail
+  15. if error table contains no errors - script will succeed
 
-  NEXT STEPS ONLY LOCALLY:
-  14. gets current git.status Object
-  15. gets all files that you have changed but not yet committed
-  16. gets file URL's and then does everything from step 5 to 12
+  		NEXT STEPS ONLY LOCALLY:
+  16. gets current git.status Object
+  17. gets all files that you have changed but not yet committed
+  18. gets file URL's and then does everything from step 6 to 15
+
+	  ### Why use this:
+
+		You can use this to fail your CI pipeline when code coverage is not good enough.
