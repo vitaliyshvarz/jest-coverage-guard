@@ -53,7 +53,7 @@
     ```
 
 2. In your jest config file `jest.config.json` add jest-coverage-guard as a reporter:
-    `"reporters": ["default", "./node_modules/jest-coverage-guard"],`
+    `"reporters": ["default", "jest-coverage-guard"],`
 
 4. Run jest tests
 
