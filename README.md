@@ -104,7 +104,7 @@
   If you want to exclude your file from coverage_check for some reason:
   add a comment to your file with "skip-coverage-check", eg. `// skip-coverage-check`
 
-  ### How does it work:
+### How does it work:
 
   1. The script assumes that you are working with a project management software where you have ticket/issue
 	numbers that are appended or included in every commit message, eg: "APP-12345 fixed typo in awesomefile.js"
@@ -128,6 +128,6 @@
   17. gets all files that you have changed but not yet committed
   18. gets file URL's and then does everything from step 6 to 15
 
-	  ### Why use this:
+### Why use this:
 
-		You can use this to fail your CI pipeline when code coverage is not good enough.
+You can use this to fail your CI pipeline when code coverage is not good enough.
