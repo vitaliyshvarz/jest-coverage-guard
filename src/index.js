@@ -18,7 +18,7 @@ class CoverageCheckReporter {
         const isWatchMode = this._globalConfig.watch || this._globalConfig.watchAll;
         const coverageResults = Object.values(results.coverageMap.data).map(fileCoverage => {
             return {
-                path: fileCoverage.path.replace(new RegExp('^.+' + config.appRoot), ''),
+                path: fileCoverage.path.replace(new RegExp('^.+' + config.appRootRelativeToGitRepo), ''),
                 results: fileCoverage.toSummary()
             };
         });
@@ -29,8 +29,8 @@ class CoverageCheckReporter {
             return;
         }
 
-        if (config && !config.appRoot) {
-            console.log(RED_LOG_ERR, 'Please add appRoot config to your coverage.guard.config.json file');
+        if (config && !config.appRootRelativeToGitRepo) {
+            console.log(RED_LOG_ERR, 'Please add appRootRelativeToGitRepo config to your coverage.guard.config.json file');
             return;
         }
 

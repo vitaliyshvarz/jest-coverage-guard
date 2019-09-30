@@ -26,7 +26,7 @@
 
     ```json
     {
-      "appRoot": "src",
+      "appRootRelativeToGitRepo": "src",
       "excludeKeywords": [
         "// skip-coverage-check",
         "backbone",
@@ -60,7 +60,7 @@
 
 #### Config options
 
-* **`appRoot`**  - path to your application source code
+* **`appRootRelativeToGitRepo`**  - path to your application source code !important: this path should be relative to git repository root and not to CWD
 * **`excludeKeywords`** - keywords that will be used to skip a file from coverage. If a file contains one of the keywords the coverage check script will ignore this file.
 * **`featureNameRegExp`** - patters to search commits by commit message. Assuming you are adding in each commit message a issue/ticket number the the beginning. e.g: 'APP-12345 fixed a nasty bug'
 * **`excludeFiles`** - array of file extensions that should be ignored from check
@@ -112,7 +112,7 @@
   3. extracts the ticket number from the branch name eg. APP-12345 (cconfig: featureNameRegExp)
   4. gets all commits the contain this ticket number in the message
   5. get all urls of the files you have changed in those commits
-  6. filters the file URL's to get only app files (config: appRoot) and skips the files that contain (config: excludeKeywords)
+  6. filters the file URL's to get only app files (config: appRootRelativeToGitRepo) and skips the files that contain (config: excludeKeywords)
   7. iterates trough all file urls and searches for a corresponding report in coverageResults that jest generated
   8. after the coverage report data is extracted, it compares the results with corresponding quality gate mask
   9. adds results to results table

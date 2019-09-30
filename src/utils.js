@@ -9,7 +9,7 @@ function getAppFiles(files, filesToSkip) {
     // we can use startsWith and endsWith since this script is expected only in node
     return files.filter(
         filePath =>
-            filePath.startsWith(config.appRoot) &&
+            filePath.startsWith(config.appRootRelativeToGitRepo) &&
             !filePath.endsWith('-test.js') && // exclude test files
             !filePath.endsWith('.less') && // exclude less files
             // the filesToSkip array contains an array of file urls WITHOUT user-frontend/
