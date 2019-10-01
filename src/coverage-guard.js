@@ -127,7 +127,7 @@ class CoverageGuard {
 
     async getFilesToExclude() {
         const results = await Promise.all(this.config.excludeKeywords.map(async keyword => {
-            const resultString = await git().raw(['grep', '-l', keyword]);
+            const resultString = await git().raw(['grep', '-l', '--full-name', keyword]);
             // grep returns a string we need to split it
             if (resultString && resultString.length) {
                 return resultString.split('\n');

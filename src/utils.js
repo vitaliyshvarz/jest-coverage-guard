@@ -12,8 +12,7 @@ function getAppFiles(files, filesToSkip) {
             filePath.startsWith(config.appRootRelativeToGitRepo) &&
             !filePath.endsWith('-test.js') && // exclude test files
             !filePath.endsWith('.less') && // exclude less files
-            // the filesToSkip array contains an array of file urls WITHOUT user-frontend/
-            !filesToSkip.includes(filePath.replace(appRoot, ''))
+            !filesToSkip.includes(filePath)
     );
 
 }
