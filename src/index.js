@@ -47,7 +47,7 @@ class CoverageCheckReporter {
         // check optional config
         if (config && !config.excludeKeywords || !config.excludeKeywords.length) {
             console.log(YELLOW_LOG_ERR, 'No excludeKeywords are provided in your coverage.guard.config.json file');
-            config.excludeKeywords = [];
+            config.excludeKeywords = [ '// skip-coverage-check' ];
         }
 
         if (config && !config.excludeFiles || !config.excludeFiles.length) {

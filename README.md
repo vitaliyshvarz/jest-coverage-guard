@@ -22,7 +22,7 @@
 
 2. Create config file (`coverage.guard.config.json`) in your project root:
 
-      _(optional: "excludeKeywords")_
+      _(optional: "excludeKeywords",  "excludeFiles", "addedFilesQualityGate", "changedFilesQualityGate")_
 
     ```json
     {
@@ -101,7 +101,7 @@
   In CI environment it will only check files that you have changed and committed
   for this feature
 
-  If you want to exclude your file from coverage_check for some reason:
+  If you want to exclude your file from coverage_check for some reason (it should be in excludeKeywords config):
   add a comment to your file with "skip-coverage-check", eg. `// skip-coverage-check`
 
 ### How does it work:
