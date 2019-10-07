@@ -56,26 +56,41 @@ class CoverageGuard {
             return;
         }
 
-        // get all commits containing current ticket number that are
-        // between last commit on current branch (HEAD) and last commit of the origin branch
+        // get all commits containing current ticket number on current branch
         let commits;
         try {
-            commits = await git().log(['--grep=' + this.currentTicketNumber + '', 'origin..HEAD']);
+            commits = await git().log(['--grep=' + this.currentTicketNumber + '', '--first-parent']);
         } catch (error) {
             console.warn('No commits found');
             return;
         }
+
         // save commit hashes from commits with current ticketnumber
         this.setCommitHashes(commits);
 
-        // if there is only one commit - get changed files from 1st generation ancestor of HEAD
-        let searchBetweenParameter = 'HEAD~1';
+        let allChangedFiles;
+        let searchBetweenParameter;
 
         if (this.commitHashes.length > 1) {
-            const firstCommitOnThisBranch = this.commitHashes[0];
-            const lastCommitOnThisBranch = this.commitHashes[this.commitHashes.length - 1];
+            const results = '';
 
-            searchBetweenParameter = `${firstCommitOnThisBranch}..${lastCommitOnThisBranch}`;
+            const allChangedFilesArray = await Promise.all(this.commitHashes.map(async (commit) => {
+                const result = await git().raw(['diff-tree', '--no-commit-id', '--name-status', '-r', commit]);
+
+                if (typeof result === 'string' && result.length > 0) {
+                    return results.concat(result);
+                }
+            }));
+
+            allChangedFiles = allChangedFilesArray.join('');
+        } else if (this.commitHashes.length === 1) {
+            // if there is only one commit - get changed files from 1st generation ancestor of HEAD
+            allChangedFiles = await git().raw(['diff', '--name-status', 'HEAD~1']);
+
+        } else {
+            console.warn('Error getting changed files for:', commits);
+
+            return;
         }
 
         console.log(`Getting files changed changes between commits:
@@ -83,15 +98,13 @@ class CoverageGuard {
             ${this.commitHashes.length} commits in total
             ticket number: ${this.currentTicketNumber}`);
 
-        const changedFiles = await git().raw(['diff', '--name-status', searchBetweenParameter]);
+        console.log('Files changed in these commits: \n', allChangedFiles);
 
-        console.log('Files changed in these commits: \n', changedFiles);
-
-        if (!changedFiles) {
+        if (!allChangedFiles) {
             return;
         }
 
-        const changedFilesWithStatuses = changedFiles.split('\n')
+        const changedFilesWithStatuses = allChangedFiles.split('\n')
             .map(fileString => ({
                 status: fileString.split('\t')[0],
                 path: fileString.split('\t')[1]
