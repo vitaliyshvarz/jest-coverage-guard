@@ -1,8 +1,9 @@
 
 # Jest Coverage Guard
 
-> Coverage quality guard, will fail your tests if coverage in files you've changed is not good enough
-> Checks you local uncommitted files and your committed files on current branch
+> Coverage quality guard, will fail your tests if coverage in changed and added files is below a defined threshold
+> 
+> Checks all locally committed and uncommitted files on the current branch
 
 ## Usage
 
