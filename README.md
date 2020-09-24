@@ -1,9 +1,11 @@
 
 # Jest Coverage Guard
 
-> Coverage quality guard, will fail your tests if coverage in changed and added files is below a defined threshold
-> 
-> Checks all locally committed and uncommitted files on the current branch
+> Enforce code coverage on legacy code.
+
+
+> Coverage quality guard will fail your tests if coverage in changed and added files is below a defined threshold
+> Checks all locally committed and uncommitted files on current branch
 
 ## Usage
 
@@ -103,8 +105,8 @@
 ### How does it work:
 
   1. The script assumes that you are working with a project management software where you have ticket/issue
-	numbers that are appended or included in every commit message, eg: "APP-12345 fixed typo in awesomefile.js"
-  2. Script gets the name of the current branch you are working on (config: featureNameRegExp)
+	numbers that are appended or included in every commit message, eg: "APP-12345: fixed typo in awesomefile.js"
+  2. Script gets the name of the current branch (config: featureNameRegExp)
   3. Extracts the ticket number from the branch name eg. APP-12345 (cconfig: featureNameRegExp)
   4. Gets all commits that contain this ticket number in the message.
   5. Gets all url's of the files you have changed in those commits.
@@ -116,7 +118,7 @@
   11. Shows the result table.
   12. Shows errors table.
   13. If error table contains errors - fail the script with exit `code 1`.
-	14. If error table contains error but you are locally in `--watch` or `--watchAll` mode - script will not fail.
+  14. If error table contains error but you are locally in `--watch` or `--watchAll` mode - script will not fail.
   15. If error table contains no errors - script will succeed.
 
   		NEXT STEPS ONLY LOCALLY:
