@@ -1,0 +1,33 @@
+name: Publish
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+
+  build:
+    name: Publish package to NPM
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Remove local dev .npmrc
+      run: rm .npmrc
+    - name: Create .npmrc
+      run: echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> .npmrc
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: Install Dependencies
+      run: npm install
+    - name: Publish to NPM
+      run: npm publish
+  

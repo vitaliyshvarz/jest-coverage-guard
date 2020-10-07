@@ -1,0 +1,28 @@
+name: Bump app version
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'package.json'
+      - 'CHANGELOG.md'
+jobs:
+  bump:
+    name: Bump version and push tag
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.MY_GITHUB_TOKEN }}
+    - name: Bump version and push tag
+      uses: TriPSs/conventional-changelog-action@v3
+      with:
+        git-user-name: 'Version Bumper'
+        release-count: 0
+        github-token: ${{ secrets.MY_GITHUB_TOKEN }}
+        git-message: 'chore(release): {version}'
+        skip-on-empty: 'false'
+        tag-prefix: ''
+        output-file: 'CHANGELOG.md'
+  
