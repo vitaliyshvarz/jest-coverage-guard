@@ -5,7 +5,9 @@
 
 
 > Coverage quality guard will fail your tests if coverage in changed files is below a defined threshold
+
 > Checks committed files in your CI if process.env.CI === 'true'
+
 > Checks changed and not yet commited files if process.env.CI !== 'true'
 
 ## Usage
