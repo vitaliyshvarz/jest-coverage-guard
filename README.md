@@ -128,21 +128,20 @@
   1. The script assumes that you are working with a project management software where you have ticket/issue
 	numbers that are appended or included in every commit message, eg: "APP-12345: fixed typo in awesomefile.js"
   2. Script gets the name of the current branch (config: featureNameRegExp)
-  3. Extracts the ticket number from the branch name eg. APP-12345 (cconfig: featureNameRegExp)
-  4. Gets all commits that contain this ticket number in the message.
+  3. Extracts the ticket number from the branch name eg. APP-12345 (config: featureNameRegExp)
+  4. Gets all commits that contain this ticket number in the commit message.
   5. Gets all url's of the files you have changed in those commits.
   6. Filters file URL's to get only app files (config: appRootRelativeToGitRepo) and skips files that contain exclude keywords (config: excludeKeywords).
   7. Finds report for each file from jest coverage report object.
   8. Compares the results with corresponding quality gate mask.
   9. Adds results to results table.
   10. Adds failed coverage errors to the errors table.
-  11. Shows the result table.
-  12. Shows errors table.
-  13. If error table contains errors - the script fails with exit `code 1`.
-  14. If error table contains errors but you are in `--watch` or `--watchAll` mode - script will not fail.
-  15. If error table contains no errors - script will succeed.
+  11. Shows the result tables.
+  12. If error table contains errors - the script fails with exit `code 1`.
+  13. If error table contains errors but you are in `--watch` or `--watchAll` mode - script will not fail.
+  14. If error table contains no errors - script will succeed.
 
   		NEXT STEPS ONLY WHEN RUNNING LOCALLY:
-  16. Gets current git.status Object.
-  17. Gets all files that you have changed but not yet committed.
-  18. Gets file URL's and then does everything from step 6 to step 15.
+  15. Gets current git.status Object.
+  16. Gets all files that you have changed but not yet committed.
+  17. Gets file URL's and then does everything from step 6 to step 15.
