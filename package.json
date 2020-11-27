@@ -1,6 +1,6 @@
 {
   "name": "jest-coverage-guard",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "jest coverage guard",
   "main": "src/index.js",
   "scripts": {
