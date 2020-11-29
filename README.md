@@ -1,13 +1,14 @@
 
 # Jest Coverage Guard
 
-> Enforce code coverage on legacy code.  
-> Coverage quality guard will fail your tests if coverage in changed files is below a defined threshold.  
-> Checks committed files in your CI if process.env.CI === 'true'.  
-> Checks changed and not yet commited files if process.env.CI !== 'true'. 
+## Check code coverage only on changed and/or commited files.  
+ 
+> Coverage quality guard will fail your tests if coverage in changed files is below defined threshold.  
+>  - process.env.CI == 'true': checks only committed files on current branch
+>  - process.env.CI == 'false': checks changed files + commited files on burrent branch
 
 <p align="center">
-  Example result for uncommited Files (running locally)
+  Example result for uncommited Files (process.env.CI == 'false')
 </p>
  <div style="text-align:center">
   <img src="./img/cmd_example_1.png?raw=true" alt="Uncommited Files" style="width:500px; align-self: center;"/>
