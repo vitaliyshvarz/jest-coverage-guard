@@ -54,7 +54,7 @@
         "body": "APP-[0-9]+",
         "flags": "g"
       },
-      "excludeFiles": [ "-test.js", ".less"],
+      "excludeFiles": [ "\\-test.(js|ts)$", "\\.less$"],
       "addedFilesQualityGate": {
         "statements": 100,
         "branches": 100,
@@ -88,7 +88,7 @@
   
    - [flags](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Advanced_searching_with_flags): search flags, for example `"flags": "g"` will look for matches globally in branch name and in commit messages.
   
-* **`excludeFiles`** - array of file extensions that should be ignored by check
+* **`excludeFiles`** - array of filename regexp bodies that should be ignored by check
 * **`addedFilesQualityGate`** - config object where you specify quality gate for newly added files, defaults to:
 ```json
 {
