@@ -1,17 +1,17 @@
 const appRoot = require('app-root-path');
 const config = require(appRoot + '/coverage.guard.config.json');
+const path = require('path');
 
 function getCommitHashes(commits) {
     return commits.map(commit => commit.hash).reverse();
 }
 
-function getAppFiles(files, filesToSkip) {
+function getAppFiles(files, excludeFiles, filesToSkip) {
     // we can use startsWith and endsWith since this script is expected only in node
     return files.filter(
         filePath =>
             filePath.startsWith(config.appRootRelativeToGitRepo) &&
-            !filePath.endsWith('-test.js') && // exclude test files
-            !filePath.endsWith('.less') && // exclude less files
+            !excludeFiles.some(excludeFile => new RegExp(excludeFile).test(path.basename(filePath))) &&
             !filesToSkip.includes(filePath)
     );
 

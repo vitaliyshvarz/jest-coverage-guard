@@ -248,7 +248,7 @@ class CoverageGuard {
     }
 
     checkCoverageOnFiles(files, qualityGate) {
-        const appFiles = getAppFiles(files, this.filesToSkip);
+        const appFiles = getAppFiles(files, this.config.excludeFiles, this.filesToSkip);
 
         if (files.length && !appFiles.length) {
             console.log(YELLOW_LOG_ERR, 'No changed files found in your project root folder, check your appRootRelativeToGitRepo config');
