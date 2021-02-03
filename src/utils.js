@@ -11,7 +11,7 @@ function getAppFiles(files, excludeFiles, filesToSkip) {
     return files.filter(
         filePath =>
             filePath.startsWith(config.appRootRelativeToGitRepo) &&
-            !excludeFiles.some(excludeFile => new RegExp(excludeFile).test(path.basename(filePath))),
+            !excludeFiles.some(excludeFile => new RegExp(excludeFile).test(path.basename(filePath))) &&
             !filesToSkip.includes(filePath)
     );
 
