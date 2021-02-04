@@ -205,7 +205,7 @@ class CoverageGuard {
             return process.env.CI_COMMIT_REF_NAME;
         }
         // github
-        if(process.env.GITHUB_REF) {
+        if(process.env.GITHUB_HEAD_REF) {
             return process.env.GITHUB_HEAD_REF;
         }
 
@@ -214,7 +214,6 @@ class CoverageGuard {
 
     getTicketNumberCI() {
         const branch = this.getBranchNameCI();
-        console.log('getBranchNameCI', branch);
         const { featureNameRegExp } = this.config;
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
         const ticketNumberMatches = branch.match(regExp);
