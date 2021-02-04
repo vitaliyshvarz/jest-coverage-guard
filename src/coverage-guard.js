@@ -206,7 +206,7 @@ class CoverageGuard {
         }
         // github
         if(process.env.GITHUB_REF) {
-            return process.env.GITHUB_REF;
+            return process.env.GITHUB_HEAD_REF;
         }
 
         return '';
