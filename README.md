@@ -4,8 +4,9 @@
 ## Check code coverage only on changed and/or commited files.  
  
 > Coverage quality guard will fail your tests if coverage in changed files is below defined threshold.  
->  - process.env.CI == 'true': checks only committed files on current branch
->  - process.env.CI == 'false': checks changed files + commited files on burrent branch
+>  - Works in GitHub Actions and GitLab Pipelines
+>  - process.env.CI == 'true': checks committed files on current branch
+>  - process.env.CI == 'false': checks changed files + commited files on current branch
 
 <p align="center">
   Example result for uncommited Files (process.env.CI == 'false')
