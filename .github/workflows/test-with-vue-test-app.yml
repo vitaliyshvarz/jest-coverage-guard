@@ -35,5 +35,5 @@ jobs:
     - name: Run tests in test app
       run: cd vue_coverage_test_app && npm run test:unit
       env:
-        APP_ROOT_PATH: /
+        APP_ROOT_PATH: ./
         
