@@ -1,0 +1,39 @@
+name: Coverage check with jest-coverage-guard
+
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Checkout Test repository
+      uses: actions/checkout@v2
+      with:
+        repository: vitaliyshvarz/vue_coverage_test_app
+        ref: master
+        path: vue_coverage_test_app
+    - name: Install dependencies in test repo
+      run: cd vue_coverage_test_app && npm install
+    - name: Link local to jest-coverage-guard
+      run: |
+        npm link
+        cd vue_coverage_test_app
+        npm link jest-coverage-guard
+    - name: Run tests in test app
+      run: cd vue_coverage_test_app && npm run test:unit
+      env:
+        APP_ROOT_PATH: ./
+        

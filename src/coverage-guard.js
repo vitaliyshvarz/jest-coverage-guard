@@ -36,6 +36,7 @@ class CoverageGuard {
 
         try {
             await this.checkCoverageForComittedFiles();
+
             if (process.env.CI !== 'true') {
                 await this.checkCoverageForUncomittedFiles();
             }
@@ -47,7 +48,6 @@ class CoverageGuard {
 
     async checkCoverageForComittedFiles() {
         await this.getCurrentTicketNumber();
-
         if (!this.currentTicketNumber) {
             return;
         }
@@ -205,8 +205,8 @@ class CoverageGuard {
             return process.env.CI_COMMIT_REF_NAME;
         }
         // github
-        if(process.env.GITHUB_REF) {
-            return process.env.GITHUB_REF;
+        if(process.env.GITHUB_HEAD_REF) {
+            return process.env.GITHUB_HEAD_REF;
         }
 
         return '';
