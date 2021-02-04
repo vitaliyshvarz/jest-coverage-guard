@@ -1,3 +1,7 @@
+## [2.2.13](https://github.com/vitaliyshvarz/jest-coverage-guard/compare/2.2.12...2.2.13) (2021-02-04)
+
+
+
 ## [2.2.12](https://github.com/vitaliyshvarz/jest-coverage-guard/compare/2.2.11...2.2.12) (2021-02-04)
 
 
