@@ -48,10 +48,6 @@ class CoverageGuard {
     async checkCoverageForComittedFiles() {
         await this.getCurrentTicketNumber();
 
-        // we should check coverage only if process.env.CI_COMMIT_REF_NAME is present
-        // process.env.CI_COMMIT_REF_NAME is present in gitlab CI
-        // process.env.CI_COMMIT_REF_NAME is NOT present on Docker image
-        // currently checking the coverage in gitlab CI is enough
         if (!this.currentTicketNumber) {
             return;
         }
@@ -203,10 +199,24 @@ class CoverageGuard {
         return ticketNumberMatches !== null && ticketNumberMatches.length && ticketNumberMatches[0];
     }
 
+    getBranchNameCI() {
+        // gitLab
+        if(process.env.CI_COMMIT_REF_NAME) {
+            return process.env.CI_COMMIT_REF_NAME;
+        }
+        // github
+        if(process.env.GITHUB_REF) {
+            return process.env.GITHUB_REF;
+        }
+
+        return '';
+    }
+
     getTicketNumberCI() {
+        const branch = this.getBranchNameCI();
         const { featureNameRegExp } = this.config;
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
-        const ticketNumberMatches = process.env.CI_COMMIT_REF_NAME.match(regExp);
+        const ticketNumberMatches = branch.match(regExp);
         return ticketNumberMatches !== null && ticketNumberMatches.length && ticketNumberMatches[0];
     }
 
