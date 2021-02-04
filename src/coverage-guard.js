@@ -48,7 +48,6 @@ class CoverageGuard {
 
     async checkCoverageForComittedFiles() {
         await this.getCurrentTicketNumber();
-        console.log(this.currentTicketNumber)
         if (!this.currentTicketNumber) {
             return;
         }
@@ -215,6 +214,7 @@ class CoverageGuard {
 
     getTicketNumberCI() {
         const branch = this.getBranchNameCI();
+        console.log('getBranchNameCI', branch);
         const { featureNameRegExp } = this.config;
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
         const ticketNumberMatches = branch.match(regExp);
