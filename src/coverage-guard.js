@@ -36,7 +36,7 @@ class CoverageGuard {
 
         try {
             await this.checkCoverageForComittedFiles();
-            console.log(process.env.CI)
+
             if (process.env.CI !== 'true') {
                 await this.checkCoverageForUncomittedFiles();
             }
@@ -48,7 +48,7 @@ class CoverageGuard {
 
     async checkCoverageForComittedFiles() {
         await this.getCurrentTicketNumber();
-
+        console.log(this.currentTicketNumber)
         if (!this.currentTicketNumber) {
             return;
         }
