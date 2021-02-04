@@ -25,11 +25,12 @@ jobs:
         repository: vitaliyshvarz/vue_coverage_test_app
         ref: master
         path: vue_coverage_test_app
+    - name: Install dependencies in test repo
+      run: cd vue_coverage_test_app && npm install
     - name: Link local to jest-coverage-guard
       run: |
+        npm link
         cd vue_coverage_test_app
-        npm install
-        cd ../
         npm link jest-coverage-guard
     - name: Run tests in test app
       run: cd vue_coverage_test_app && npm run test:unit
