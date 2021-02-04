@@ -23,6 +23,10 @@
   <img src="./img/cmd_example_2.png?raw=true" alt="Commited Files" style="width:500px; align-self: center;"/>
 </div>
 
+<p align="center">
+  <a href="https://github.com/vitaliyshvarz/vue_coverage_test_app/runs/1831230170?check_suite_focus=true">Example fail result in Git Actions</a>
+</p>
+
 ## Usage
 
 1. Install jest-coverage-guard in your project
