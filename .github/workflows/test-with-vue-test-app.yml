@@ -34,4 +34,6 @@ jobs:
         npm link jest-coverage-guard
     - name: Run tests in test app
       run: cd vue_coverage_test_app && npm run test:unit
+      env:
+        APP_ROOT_PATH: vue_coverage_test_app
         
