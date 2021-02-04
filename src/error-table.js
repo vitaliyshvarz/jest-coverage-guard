@@ -81,7 +81,7 @@ class ErrorTable {
 
     showCommited() {
         if (this.tables.length > 0) {
-            console.log(RED_LOG_ERR, 'Coverage quality gate in previos commits failed');
+            console.log(RED_LOG_ERR, 'Coverage quality gate in previous commits failed');
 
             this.tables.forEach((table) => {
                 console.table(table);
