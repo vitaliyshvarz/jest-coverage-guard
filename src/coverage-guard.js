@@ -36,9 +36,9 @@ class CoverageGuard {
 
         try {
             await this.checkCoverageForComittedFiles();
-
+            console.log(this.config);
             if (process.env.CI === true || process.env.CI === 'true') {
-                console.log(this.config);
+                console.log(typeof process.env.CI);
                 await this.checkCoverageForUncomittedFiles();
             }
             this.finalizeCoverage();

@@ -32,7 +32,7 @@ jobs:
         git fetch
         git checkout success_example
         git pull
-        git log --graph success_example
+        git log --walk-reflogs success_example
         
     - name: Install dependencies in test repo
       run: cd vue_coverage_test_app && npm install
@@ -58,8 +58,8 @@ jobs:
         git fetch
         git checkout fail_example
         git pull
-        git log --graph fail_example
-        git remote -v
+        git log --walk-reflogs fail_example
+
     - name: Install dependencies in test repo
       run: cd vue_coverage_test_app && npm install
     - name: Link local to jest-coverage-guard
