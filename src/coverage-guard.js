@@ -57,6 +57,7 @@ class CoverageGuard {
         let commits;
         try {
             commits = await git().log(['--grep=' + this.currentTicketNumber + '', '--first-parent']);
+            console.log(git().getRemotes());
         } catch (error) {
             console.warn('No commits found');
             return;

@@ -29,6 +29,10 @@ jobs:
       run: |
         git remote -v
         git remote set-url origin git@github.com:vitaliyshvarz/vue_coverage_test_app.git
+        git fetch
+        git checkout success_example
+        git pull
+        git log --graph success_example
         git remote -v
     - name: Install dependencies in test repo
       run: cd vue_coverage_test_app && npm install
@@ -51,6 +55,10 @@ jobs:
       run: |
         git remote -v
         git remote set-url origin git@github.com:vitaliyshvarz/vue_coverage_test_app.git
+        git fetch
+        git checkout success_example
+        git pull
+        git log --graph success_example
         git remote -v
     - name: Install dependencies in test repo
       run: cd vue_coverage_test_app && npm install
