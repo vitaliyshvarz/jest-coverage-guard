@@ -9,7 +9,7 @@
 > Coverage quality guard will fail your tests if coverage in changed files is below defined threshold.  
 >  - Works in GitHub Actions and GitLab Pipelines
 >  - In CI environment checks files found in commits containing `featureNameRegExp` in message
->  - Locally checks changed files and commited files on current branch
+>  - Locally checks both commited and uncommited files in commits containing `featureNameRegExp` in message
 
 <p align="center">
   Example result for uncommited Files (process.env.CI == 'false')
