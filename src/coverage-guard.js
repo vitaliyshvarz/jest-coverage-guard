@@ -38,11 +38,9 @@ class CoverageGuard {
             await this.checkCoverageForComittedFiles();
 
             if (process.env.CI !== 'true') {
+                console.log(process.env.CI);
                 await this.checkCoverageForUncomittedFiles();
             }
-
-            console.log(process.env.CI);
-            
             this.finalizeCoverage();
         } catch (err) {
             console.error(err);
@@ -260,8 +258,7 @@ class CoverageGuard {
         const appFiles = getAppFiles(files, this.config.excludeFiles, this.filesToSkip);
 
         if (files.length && !appFiles.length) {
-            console.log(YELLOW_LOG_ERR, 
-            `No changed files found in ${this.config.appRootRelativeToGitRepo} folder, 
+            console.log(YELLOW_LOG_ERR, `No changed files found in ${this.config.appRootRelativeToGitRepo} folder, 
             check your appRootRelativeToGitRepo config`);
             console.log('Changed files:', files);
         }
