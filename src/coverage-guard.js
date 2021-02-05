@@ -65,7 +65,6 @@ class CoverageGuard {
         this.setCommitHashes(commits);
 
         let allChangedFiles;
-        let searchBetweenParameter;
 
         if (this.commitHashes.length > 1) {
             const results = '';
@@ -89,11 +88,8 @@ class CoverageGuard {
             return;
         }
 
-        console.log(`Getting files changed changes between commits:
-            ${searchBetweenParameter}
-            ${this.commitHashes.length} commits in total
-            ticket number: ${this.currentTicketNumber}`);
-
+        console.log(`Getting files from ${this.commitHashes.length} commits
+                    for feature: ${this.currentTicketNumber}`);
         console.log('Files changed in these commits: \n', allChangedFiles);
 
         if (!allChangedFiles) {
@@ -162,7 +158,7 @@ class CoverageGuard {
 
     finalizeCoverage() {
         if (this.errorTable.containsErrors) {
-            console.error(RED_BG_LOG_ERR, 'You failed coverage!');
+            console.error(RED_BG_LOG_ERR, '\n You failed coverage!');
 
             // we should fail only if not in watch mode
             if (!this.isWatchMode) {
@@ -261,7 +257,9 @@ class CoverageGuard {
         const appFiles = getAppFiles(files, this.config.excludeFiles, this.filesToSkip);
 
         if (files.length && !appFiles.length) {
-            console.log(YELLOW_LOG_ERR, 'No changed files found in your project root folder, check your appRootRelativeToGitRepo config');
+            console.log(YELLOW_LOG_ERR, 
+            `No changed files found in ${this.config.appRootRelativeToGitRepo} folder, 
+            check your appRootRelativeToGitRepo config`);
             console.log('Changed files:', files);
         }
 

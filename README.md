@@ -1,12 +1,15 @@
 
 # Jest Coverage Guard
 
-## Check code coverage only on changed and/or commited files.  
+### Check code coverage only files you change
+
+#### Perfect Use case: **Enforce code coverage for legacy uncovered code**
+---
  
 > Coverage quality guard will fail your tests if coverage in changed files is below defined threshold.  
 >  - Works in GitHub Actions and GitLab Pipelines
->  - process.env.CI == 'true': checks committed files on current branch
->  - process.env.CI == 'false': checks changed files + commited files on current branch
+>  - In CI environment checks files found in commits containing `featureNameRegExp` in message
+>  - Locally checks changed files and commited files on current branch
 
 <p align="center">
   Example result for uncommited Files (process.env.CI == 'false')
@@ -24,7 +27,7 @@
 </div>
 
 <p align="center">
-  <a href="https://github.com/vitaliyshvarz/vue_coverage_test_app/runs/1831230170?check_suite_focus=true">Example fail result in Git Actions</a>
+  <a href="https://github.com/vitaliyshvarz/vue_coverage_test_app/runs/1831230170?check_suite_focus=true">Example fail  result in Git Actions</a>
 </p>
 
 ## Usage
