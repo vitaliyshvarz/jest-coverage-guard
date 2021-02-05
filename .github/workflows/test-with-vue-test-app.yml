@@ -27,13 +27,13 @@ jobs:
         path: vue_coverage_test_app
     - name: Set origin as test repo
       run: |
+        git remote set-url origin https://github.com/vitaliyshvarz/vue_coverage_test_app.git
         git remote -v
-        git remote set-url origin git@github.com:vitaliyshvarz/vue_coverage_test_app.git
         git fetch
         git checkout success_example
         git pull
         git log --graph success_example
-        git remote -v
+        
     - name: Install dependencies in test repo
       run: cd vue_coverage_test_app && npm install
     - name: Link local to jest-coverage-guard
@@ -54,7 +54,7 @@ jobs:
     - name: Set origin as test repo
       run: |
         git remote -v
-        git remote set-url origin git@github.com:vitaliyshvarz/vue_coverage_test_app.git
+        git remote set-url origin https://github.com/vitaliyshvarz/vue_coverage_test_app.git
         git fetch
         git checkout success_example
         git pull
