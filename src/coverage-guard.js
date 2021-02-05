@@ -198,11 +198,11 @@ class CoverageGuard {
 
     getBranchNameCI() {
         // gitLab
-        if(process.env.CI_COMMIT_REF_NAME) {
+        if (process.env.CI_COMMIT_REF_NAME) {
             return process.env.CI_COMMIT_REF_NAME;
         }
         // github
-        if(process.env.GITHUB_HEAD_REF) {
+        if (process.env.GITHUB_HEAD_REF) {
             return process.env.GITHUB_HEAD_REF;
         }
 
@@ -258,8 +258,7 @@ class CoverageGuard {
         const appFiles = getAppFiles(files, this.config.excludeFiles, this.filesToSkip);
 
         if (files.length && !appFiles.length) {
-            console.log(YELLOW_LOG_ERR, `No changed files found in ${this.config.appRootRelativeToGitRepo} folder, 
-            check your appRootRelativeToGitRepo config`);
+            console.log(YELLOW_LOG_ERR, `No changed files found in ${this.config.appRootRelativeToGitRepo} folder, check your appRootRelativeToGitRepo config`);
             console.log('Changed files:', files);
         }
 
