@@ -40,6 +40,9 @@ class CoverageGuard {
             if (process.env.CI !== 'true') {
                 await this.checkCoverageForUncomittedFiles();
             }
+
+            console.log(process.env.CI);
+            
             this.finalizeCoverage();
         } catch (err) {
             console.error(err);
