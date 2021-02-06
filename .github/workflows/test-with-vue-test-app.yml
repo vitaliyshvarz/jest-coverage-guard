@@ -35,12 +35,12 @@ jobs:
         git checkout success_example
         git log --walk-reflogs success_example
 
-        cd vue_coverage_test_app && npm install
+        npm install
 
         rm -rf vue_coverage_test_app/node_modules/jest-coverage-guard/src
         cp -r src vue_coverage_test_app/node_modules/jest-coverage-guard/src
 
-        cd vue_coverage_test_app && npm run test:unit
+        npm run test:unit
         
 
     - name: Checkout test repository failure example branch
