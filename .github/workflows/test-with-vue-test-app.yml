@@ -71,3 +71,4 @@ jobs:
       run: cd vue_coverage_test_app && npm run test:unit
       env:
         APP_ROOT_PATH: ./
+        TESTING_FAILURE_GUARD_IN_GITHUB: true
