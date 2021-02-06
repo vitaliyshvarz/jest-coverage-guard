@@ -29,7 +29,6 @@ jobs:
     - name: Set origin as test repo
       run: |
         cd vue_coverage_test_app
-        git remote set-url origin https://github.com/vitaliyshvarz/vue_coverage_test_app.git
         git remote -v
         git fetch
         git checkout success_example
@@ -55,7 +54,6 @@ jobs:
     - name: Set origin as test repo
       run: |
         cd vue_coverage_test_app
-        git remote set-url origin https://github.com/vitaliyshvarz/vue_coverage_test_app.git
         git remote -v
         git fetch
        
