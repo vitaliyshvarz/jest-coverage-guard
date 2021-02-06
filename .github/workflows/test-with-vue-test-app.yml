@@ -41,7 +41,7 @@ jobs:
     - name: Link local to jest-coverage-guard
       run: |
         rm -rf vue_coverage_test_app/node_modules/jest-coverage-guard/src
-        cp -r /src vue_coverage_test_app/node_modules/jest-coverage-guard/src
+        cp -r src vue_coverage_test_app/node_modules/jest-coverage-guard/src
     - name: Run tests in test app
       run: cd vue_coverage_test_app && npm run test:unit
       env:
@@ -69,7 +69,7 @@ jobs:
     - name: Link local to jest-coverage-guard
       run: |
         rm -rf vue_coverage_test_app/node_modules/jest-coverage-guard/src
-        cp -r /src vue_coverage_test_app/node_modules/jest-coverage-guard/src
+        cp -r src vue_coverage_test_app/node_modules/jest-coverage-guard/src
     - name: Run tests in test app
       run: cd vue_coverage_test_app && npm run test:unit
       env:
