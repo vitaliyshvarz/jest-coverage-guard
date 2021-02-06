@@ -33,12 +33,9 @@ class CoverageGuard {
 
     async start() {
         await this.getFilesToExclude();
-        console.log(this.config);
         try {
             await this.checkCoverageForComittedFiles();
-            console.log(this.config);
             if (process.env.CI === true || process.env.CI === 'true') {
-                console.log(typeof process.env.CI);
                 await this.checkCoverageForUncomittedFiles();
             }
             this.finalizeCoverage();
