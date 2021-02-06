@@ -42,7 +42,7 @@ jobs:
         
         npm run test:unit
       env:
-        GITHUB_HEAD_REF: 'success_example'
+        TESTING_SUCCESS_GUARD_IN_GITHUB: true
 
     - name: Checkout test repository failure example branch
       uses: actions/checkout@v2

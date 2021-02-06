@@ -206,6 +206,11 @@ class CoverageGuard {
             return process.env.GITHUB_HEAD_REF;
         }
 
+        if (process.env.TESTING_SUCCESS_GUARD_IN_GITHUB) {
+            console.log('process.env.TESTING_SUCCESS_GUARD_IN_GITHUB', process.env.TESTING_SUCCESS_GUARD_IN_GITHUB)
+            return 'success_example';
+        }
+
         return '';
     }
 
