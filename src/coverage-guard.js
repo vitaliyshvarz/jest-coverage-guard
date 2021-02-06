@@ -54,8 +54,8 @@ class CoverageGuard {
         // get all commits containing current ticket number on current branch
         let commits;
         try {
-            console.log('commits', commits);
             commits = await git().log(['--grep=' + this.currentTicketNumber + '', '--first-parent']);
+            console.log('commits', commits);
         } catch (error) {
             console.warn('No commits found');
             return;
