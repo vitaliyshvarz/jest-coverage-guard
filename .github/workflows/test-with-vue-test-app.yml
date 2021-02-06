@@ -37,8 +37,8 @@ jobs:
 
         npm install
 
-        rm -rf vue_coverage_test_app/node_modules/jest-coverage-guard/src
-        cp -r src vue_coverage_test_app/node_modules/jest-coverage-guard/src
+        rm -rf node_modules/jest-coverage-guard/src
+        cp -r ../src node_modules/jest-coverage-guard/src
 
         npm run test:unit
         
