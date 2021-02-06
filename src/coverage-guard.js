@@ -33,7 +33,7 @@ class CoverageGuard {
 
     async start() {
         await this.getFilesToExclude();
-
+        console.log(this.config);
         try {
             await this.checkCoverageForComittedFiles();
             console.log(this.config);
