@@ -37,7 +37,6 @@ class CoverageGuard {
         try {
             await this.checkCoverageForComittedFiles();
             if (process.env.CI === true || process.env.CI === 'true') {
-                console.log(this.config);
                 await this.checkCoverageForUncomittedFiles();
             }
             this.finalizeCoverage();
@@ -56,6 +55,7 @@ class CoverageGuard {
         let commits;
         try {
             commits = await git().log(['--grep=' + this.currentTicketNumber + '', '--first-parent']);
+            console.log(commits);
         } catch (error) {
             console.warn('No commits found');
             return;
