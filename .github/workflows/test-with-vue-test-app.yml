@@ -39,9 +39,10 @@ jobs:
 
         rm -rf node_modules/jest-coverage-guard/src
         cp -r ../src node_modules/jest-coverage-guard/src
-        git branch
-        npm run test:unit
         
+        npm run test:unit
+      env:
+        GITHUB_HEAD_REF: 'success_example'
 
     - name: Checkout test repository failure example branch
       uses: actions/checkout@v2
