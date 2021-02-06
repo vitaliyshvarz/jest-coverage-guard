@@ -148,6 +148,7 @@ class CoverageGuard {
     async getCurrentTicketNumber() {
         if (process.env.CI === 'true' || process.env.CI === true) {
             this.currentTicketNumber = this.getTicketNumberCI();
+            console.log('Ticket ID', this.currentTicketNumber);
             return Promise.resolve();
         }
         // get current brnach name
@@ -210,6 +211,7 @@ class CoverageGuard {
 
     getTicketNumberCI() {
         const branch = this.getBranchNameCI();
+        console.log('Looking for commits on branch', branch);
         const { featureNameRegExp } = this.config;
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
         const ticketNumberMatches = branch.match(regExp);
