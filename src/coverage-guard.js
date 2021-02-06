@@ -222,6 +222,7 @@ class CoverageGuard {
         const branch = this.getBranchNameCI();
         console.log('Looking for commits on branch', branch);
         const { featureNameRegExp } = this.config;
+        console.log('featureNameRegExp', featureNameRegExp);
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
         const ticketNumberMatches = branch.match(regExp);
         return ticketNumberMatches !== null && ticketNumberMatches.length && ticketNumberMatches[0];
