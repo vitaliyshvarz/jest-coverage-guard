@@ -38,7 +38,7 @@ jobs:
     - name: Install dependencies in test repo
       run: cd vue_coverage_test_app && npm install
 
-    - name: Link local to jest-coverage-guard
+    - name: Copy src folder to test app node_modules
       run: |
         rm -rf vue_coverage_test_app/node_modules/jest-coverage-guard/src
         cp -r src vue_coverage_test_app/node_modules/jest-coverage-guard/src
@@ -66,7 +66,7 @@ jobs:
     - name: Install dependencies in test repo
       run: cd vue_coverage_test_app && npm install
 
-    - name: Link local to jest-coverage-guard
+    - name: Copy src folder to test app node_modules
       run: |
         rm -rf vue_coverage_test_app/node_modules/jest-coverage-guard/src
         cp -r src vue_coverage_test_app/node_modules/jest-coverage-guard/src
