@@ -39,7 +39,7 @@ jobs:
 
         rm -rf node_modules/jest-coverage-guard/src
         cp -r ../src node_modules/jest-coverage-guard/src
-
+        git branch
         npm run test:unit
         
 
