@@ -55,7 +55,6 @@ class CoverageGuard {
         let commits;
         try {
             commits = await git().log(['--grep=' + this.currentTicketNumber + '', '--first-parent']);
-            console.log(commits);
         } catch (error) {
             console.warn('No commits found');
             return;
@@ -63,6 +62,8 @@ class CoverageGuard {
 
         // save commit hashes from commits with current ticketnumber
         this.setCommitHashes(commits);
+
+        console.log('this.commitHashes', this.commitHashes);
 
         let allChangedFiles;
 
