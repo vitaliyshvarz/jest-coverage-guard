@@ -197,6 +197,15 @@ class CoverageGuard {
     }
 
     getBranchNameCI() {
+
+        console.log(process.env);
+        console.log('process.env.TESTING_SUCCESS_GUARD_IN_GITHUB', process.env.TESTING_SUCCESS_GUARD_IN_GITHUB);
+
+        if (process.env.TESTING_SUCCESS_GUARD_IN_GITHUB) {
+            console.log('process.env.TESTING_SUCCESS_GUARD_IN_GITHUB', process.env.TESTING_SUCCESS_GUARD_IN_GITHUB)
+            return 'success_example';
+        }
+
         // gitLab
         if (process.env.CI_COMMIT_REF_NAME) {
             return process.env.CI_COMMIT_REF_NAME;
@@ -204,11 +213,6 @@ class CoverageGuard {
         // github
         if (process.env.GITHUB_HEAD_REF) {
             return process.env.GITHUB_HEAD_REF;
-        }
-
-        if (process.env.TESTING_SUCCESS_GUARD_IN_GITHUB) {
-            console.log('process.env.TESTING_SUCCESS_GUARD_IN_GITHUB', process.env.TESTING_SUCCESS_GUARD_IN_GITHUB)
-            return 'success_example';
         }
 
         return '';
