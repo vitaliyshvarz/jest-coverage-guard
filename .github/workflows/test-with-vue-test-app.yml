@@ -58,7 +58,7 @@ jobs:
         git fetch
        
         git checkout fail_example
-        git pull
+        git pull --no-rebase
         git log --grep=fail_example
 
     - name: Install dependencies in test repo
