@@ -59,7 +59,7 @@ jobs:
        
         git checkout fail_example
         git pull --no-rebase
-        git log --grep=fail_example
+        git log --grep=fail-example
 
     - name: Install dependencies in test repo
       run: cd vue_coverage_test_app && npm install
