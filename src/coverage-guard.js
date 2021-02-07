@@ -54,11 +54,11 @@ class CoverageGuard {
         // get all commits containing current ticket number on current branch
         let commits;
         try {
-            await git.stash();
+            await git().stash();
 
             const commitsBla = await git().pull('origin', 'fail_example', { '--rebase': 'true' });
 
-            await git.stash(['apply']);
+            await git().stash(['apply']);
             commits = await git().log(['--grep=' + this.currentTicketNumber + '', '--first-parent']);
             
             
