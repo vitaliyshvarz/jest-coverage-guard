@@ -66,7 +66,7 @@ class CoverageGuard {
             console.log('commitsBla', commitsBla);
 
         } catch (error) {
-            console.warn('No commits found');
+            console.warn('No commits found', error);
             return;
         }
 
