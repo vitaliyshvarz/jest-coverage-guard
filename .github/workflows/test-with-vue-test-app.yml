@@ -55,10 +55,6 @@ jobs:
       run: |
         cd vue_coverage_test_app
         git remote -v
-        git fetch
-       
-        git checkout fail_example
-        git pull --no-rebase
         git log --grep=fail-example
 
     - name: Install dependencies in test repo
