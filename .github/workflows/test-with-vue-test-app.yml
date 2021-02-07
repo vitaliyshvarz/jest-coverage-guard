@@ -32,8 +32,10 @@ jobs:
         git remote -v
         git fetch
         git checkout success_example
-        git pull
+        git pull origin success_example
         git log --walk-reflogs success_example
+        git log --grep=success_example
+
 
         npm install
 
