@@ -36,7 +36,7 @@ class CoverageGuard {
 
         try {
             await this.checkCoverageForComittedFiles();
-            if (process.env.CI === true || process.env.CI === 'true') {
+            if (!process.env.CI || process.env.CI === 'false') {
                 await this.checkCoverageForUncomittedFiles();
             }
             this.finalizeCoverage();
@@ -147,7 +147,7 @@ class CoverageGuard {
     async getCurrentTicketNumber() {
         if (process.env.CI === 'true' || process.env.CI === true) {
             this.currentTicketNumber = this.getTicketNumberCI();
-            console.log('Ticket ID', this.currentTicketNumber);
+            console.log('Ticket ID:', this.currentTicketNumber);
             return Promise.resolve();
         }
         // get current brnach name
@@ -214,7 +214,7 @@ class CoverageGuard {
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
         const ticketNumberMatches = branch.match(regExp);
 
-        console.log('Looking for commits on branch', branch);
+        console.log('Looking for commits on branch:', branch);
 
         return ticketNumberMatches !== null && ticketNumberMatches.length && ticketNumberMatches[0];
     }
