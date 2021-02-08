@@ -1,7 +1,7 @@
 
 # Jest Coverage Guard
 
-### Check code coverage only files you change
+### Check code coverage only in files you change
 
 #### Perfect Use case: **Enforce code coverage for legacy uncovered code**
 ---
@@ -12,7 +12,7 @@
 >  - Locally checks both commited and uncommited files in commits containing `featureNameRegExp` in message
 
 <p align="center">
-  Example result for uncommited Files (process.env.CI == 'false')
+  Example result for uncommited Files (process.env.CI != true)
 </p>
  <div style="text-align:center">
   <img src="./img/cmd_example_1.png?raw=true" alt="Uncommited Files" style="width:500px; align-self: center;"/>
@@ -81,7 +81,7 @@
 2. In your jest config file `jest.config.json` add jest-coverage-guard as a reporter:
     `"reporters": ["default", "jest-coverage-guard"],`
 
-3. Make sure that in your CI you have process.env.CI === 'true' to check commited files
+3. Make sure that in your CI, you have process.env.CI test to true, to check commited files
 
 4. Run jest tests and see the output
 
@@ -150,7 +150,7 @@
   13. If error table contains errors but you are in `--watch` or `--watchAll` mode - script will not fail.
   14. If error table contains no errors - script will succeed.
 
-  		NEXT STEPS ONLY WHEN RUNNING LOCALLY:
+  		NEXT STEPS ONLY WHEN (process.env.CI != true):
   15. Gets current git.status Object.
   16. Gets all files that you have changed but not yet committed.
   17. Gets file URL's and then does everything from step 6 to step 15.

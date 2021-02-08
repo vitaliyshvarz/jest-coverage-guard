@@ -4,6 +4,7 @@ const RED_LOG_ERR = '\x1b[31m%s\x1b[0m';
 const BLUE_LOG_ERR = '\x1b[34m';
 const GREEN_LOG_ERR = '\x1b[32m%s\x1b[0m';
 const BLUE_BG_LOG_ERR = '\x1b[44m%s\x1b[0m';
+const RESET_COLOR = '\x1b[0m';
 
 const ADDED_FILES_QUALITY_GATE = {
     statements: 100,
@@ -27,5 +28,6 @@ module.exports = {
     GREEN_LOG_ERR,
     RED_LOG_ERR,
     BLUE_BG_LOG_ERR,
-    BLUE_LOG_ERR
+    BLUE_LOG_ERR,
+    RESET_COLOR
 };

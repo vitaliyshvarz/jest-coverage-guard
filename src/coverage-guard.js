@@ -12,7 +12,8 @@ const {
     YELLOW_LOG_ERR,
     RED_LOG_ERR,
     GREEN_LOG_ERR,
-    BLUE_LOG_ERR
+    BLUE_LOG_ERR,
+    RESET_COLOR
 } = require('./constants');
 
 class CoverageGuard {
@@ -88,7 +89,7 @@ class CoverageGuard {
             return;
         }
 
-        console.log(BLUE_LOG_ERR, `Getting files changed in ${this.commitHashes.length} commits for ticket id: ${this.currentTicketNumber}`);
+        console.log(BLUE_LOG_ERR, `Getting files changed in ${this.commitHashes.length} commits for ticket id: ${this.currentTicketNumber}\n`, RESET_COLOR);
         console.log('Files changed in these commits:\n', allChangedFiles);
 
         if (!allChangedFiles) {
@@ -147,7 +148,7 @@ class CoverageGuard {
     async getCurrentTicketNumber() {
         if (process.env.CI === 'true' || process.env.CI === true) {
             this.currentTicketNumber = this.getTicketNumberCI();
-            console.log(BLUE_LOG_ERR, `Ticket ID: ${this.currentTicketNumber}`);
+            console.log(BLUE_LOG_ERR, `Ticket ID: ${this.currentTicketNumber}`, RESET_COLOR);
             return Promise.resolve();
         }
         // get current brnach name
@@ -158,10 +159,10 @@ class CoverageGuard {
 
     finalizeCoverage() {
         if (this.errorTable.containsErrors) {
-            console.log(RED_LOG_ERR, 'You failed coverage!');
+            console.log(RED_LOG_ERR, 'You failed coverage!', RESET_COLOR);
 
             if (process.env.IN_COVERAGE_TEST_ACTION) {
-                console.log(GREEN_LOG_ERR, 'Succeeding this task because you are in test jest-coverage-guard CI test environment');
+                console.log(GREEN_LOG_ERR, 'Succeeding this task because you are in test jest-coverage-guard CI test environment', RESET_COLOR);
             }
 
             // we should fail only if not in watch mode
@@ -169,7 +170,7 @@ class CoverageGuard {
                 process.exit(1, 'Coverage quality gate failed');
             }
         } else {
-            console.log(GREEN_LOG_ERR, 'Well done Comrade!');
+            console.log(GREEN_LOG_ERR, 'Well done Comrade!', RESET_COLOR);
         }
     }
 
@@ -200,6 +201,9 @@ class CoverageGuard {
     }
 
     getBranchNameCI() {
+        if (process.env.IN_COVERAGE_TEST_ACTION) {
+            return 'feature/APP-123_add_testing';
+        }
         // gitLab
         if (process.env.CI_COMMIT_REF_NAME) {
             return process.env.CI_COMMIT_REF_NAME;
@@ -218,7 +222,7 @@ class CoverageGuard {
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
         const ticketNumberMatches = branch.match(regExp);
 
-        console.log(BLUE_LOG_ERR, `Looking for commits on branch: ${branch}`);
+        console.log(BLUE_LOG_ERR, `Looking for commits on branch: ${branch}`, RESET_COLOR);
 
         return ticketNumberMatches !== null && ticketNumberMatches.length && ticketNumberMatches[0];
     }
