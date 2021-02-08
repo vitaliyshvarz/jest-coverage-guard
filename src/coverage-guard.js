@@ -12,7 +12,7 @@ const {
     YELLOW_LOG_ERR,
     RED_BG_LOG_ERR,
     GREEN_LOG_ERR,
-    BLUE_BG_LOG_ERR
+    BLUE_LOG_ERR
 } = require('./constants');
 
 class CoverageGuard {
@@ -88,7 +88,7 @@ class CoverageGuard {
             return;
         }
 
-        console.log(BLUE_BG_LOG_ERR, `Getting files from ${this.commitHashes.length} commits for feature: ${this.currentTicketNumber}`);
+        console.log(BLUE_LOG_ERR, `Getting files from ${this.commitHashes.length} commits for feature: ${this.currentTicketNumber}`);
         console.log('Files changed in these commits:\n', allChangedFiles);
 
         if (!allChangedFiles) {
@@ -147,7 +147,7 @@ class CoverageGuard {
     async getCurrentTicketNumber() {
         if (process.env.CI === 'true' || process.env.CI === true) {
             this.currentTicketNumber = this.getTicketNumberCI();
-            console.log(BLUE_BG_LOG_ERR, `Ticket ID: ${this.currentTicketNumber}`);
+            console.log(BLUE_LOG_ERR, `Ticket ID: ${this.currentTicketNumber}`);
             return Promise.resolve();
         }
         // get current brnach name
@@ -214,7 +214,7 @@ class CoverageGuard {
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
         const ticketNumberMatches = branch.match(regExp);
 
-        console.log(BLUE_BG_LOG_ERR, `Looking for commits on branch: ${branch}`);
+        console.log(BLUE_LOG_ERR, `Looking for commits on branch: ${branch}`);
 
         return ticketNumberMatches !== null && ticketNumberMatches.length && ticketNumberMatches[0];
     }
