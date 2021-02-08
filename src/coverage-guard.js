@@ -63,6 +63,9 @@ class CoverageGuard {
         // save commit hashes from commits with current ticketnumber
         this.setCommitHashes(commits);
 
+        console.log('commits: ', commits);
+        console.log('this.commitHashes: ', this.commitHashes);
+
         let allChangedFiles;
 
         if (this.commitHashes.length > 1) {
