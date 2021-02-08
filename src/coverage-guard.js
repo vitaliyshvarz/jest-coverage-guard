@@ -196,15 +196,6 @@ class CoverageGuard {
     }
 
     getBranchNameCI() {
-
-        if (process.env.TESTING_SUCCESS_GUARD_IN_GITHUB) {
-            return 'success_example';
-        }
-
-        if (process.env.TESTING_FAILURE_GUARD_IN_GITHUB) {
-            return 'fail_example';
-        }
-
         // gitLab
         if (process.env.CI_COMMIT_REF_NAME) {
             return process.env.CI_COMMIT_REF_NAME;
