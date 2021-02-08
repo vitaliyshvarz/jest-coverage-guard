@@ -3,3 +3,4 @@ package-lock.json
 .eslintrc.json
 .gitignore
 .github
+test-app/

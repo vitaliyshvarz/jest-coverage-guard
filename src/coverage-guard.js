@@ -10,8 +10,9 @@ const {
 } = require('./utils');
 const {
     YELLOW_LOG_ERR,
-    RED_BG_LOG_ERR,
-    GREEN_LOG_ERR
+    RED_LOG_ERR,
+    GREEN_LOG_ERR,
+    BLUE_LOG_ERR
 } = require('./constants');
 
 class CoverageGuard {
@@ -36,8 +37,7 @@ class CoverageGuard {
 
         try {
             await this.checkCoverageForComittedFiles();
-
-            if (process.env.CI !== 'true') {
+            if (!process.env.CI || process.env.CI === 'false') {
                 await this.checkCoverageForUncomittedFiles();
             }
             this.finalizeCoverage();
@@ -57,7 +57,7 @@ class CoverageGuard {
         try {
             commits = await git().log(['--grep=' + this.currentTicketNumber + '', '--first-parent']);
         } catch (error) {
-            console.warn('No commits found');
+            console.warn('No commits found', error);
             return;
         }
 
@@ -65,7 +65,6 @@ class CoverageGuard {
         this.setCommitHashes(commits);
 
         let allChangedFiles;
-        let searchBetweenParameter;
 
         if (this.commitHashes.length > 1) {
             const results = '';
@@ -89,12 +88,8 @@ class CoverageGuard {
             return;
         }
 
-        console.log(`Getting files changed changes between commits:
-            ${searchBetweenParameter}
-            ${this.commitHashes.length} commits in total
-            ticket number: ${this.currentTicketNumber}`);
-
-        console.log('Files changed in these commits: \n', allChangedFiles);
+        console.log(BLUE_LOG_ERR, `Getting files changed in ${this.commitHashes.length} commits for ticket id: ${this.currentTicketNumber}`);
+        console.log('Files changed in these commits:\n', allChangedFiles);
 
         if (!allChangedFiles) {
             return;
@@ -150,8 +145,9 @@ class CoverageGuard {
     }
 
     async getCurrentTicketNumber() {
-        if (process.env.CI === 'true') {
+        if (process.env.CI === 'true' || process.env.CI === true) {
             this.currentTicketNumber = this.getTicketNumberCI();
+            console.log(BLUE_LOG_ERR, `Ticket ID: ${this.currentTicketNumber}`);
             return Promise.resolve();
         }
         // get current brnach name
@@ -162,10 +158,14 @@ class CoverageGuard {
 
     finalizeCoverage() {
         if (this.errorTable.containsErrors) {
-            console.error(RED_BG_LOG_ERR, 'You failed coverage!');
+            console.log(RED_LOG_ERR, 'You failed coverage!');
+
+            if (process.env.IN_COVERAGE_TEST_ACTION) {
+                console.log(GREEN_LOG_ERR, 'Succeeding this task because you are in test jest-coverage-guard CI test environment');
+            }
 
             // we should fail only if not in watch mode
-            if (!this.isWatchMode) {
+            if (!this.isWatchMode && !process.env.IN_COVERAGE_TEST_ACTION) {
                 process.exit(1, 'Coverage quality gate failed');
             }
         } else {
@@ -201,11 +201,11 @@ class CoverageGuard {
 
     getBranchNameCI() {
         // gitLab
-        if(process.env.CI_COMMIT_REF_NAME) {
+        if (process.env.CI_COMMIT_REF_NAME) {
             return process.env.CI_COMMIT_REF_NAME;
         }
         // github
-        if(process.env.GITHUB_HEAD_REF) {
+        if (process.env.GITHUB_HEAD_REF) {
             return process.env.GITHUB_HEAD_REF;
         }
 
@@ -217,6 +217,9 @@ class CoverageGuard {
         const { featureNameRegExp } = this.config;
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
         const ticketNumberMatches = branch.match(regExp);
+
+        console.log(BLUE_LOG_ERR, `Looking for commits on branch: ${branch}`);
+
         return ticketNumberMatches !== null && ticketNumberMatches.length && ticketNumberMatches[0];
     }
 
@@ -261,7 +264,7 @@ class CoverageGuard {
         const appFiles = getAppFiles(files, this.config.excludeFiles, this.filesToSkip);
 
         if (files.length && !appFiles.length) {
-            console.log(YELLOW_LOG_ERR, 'No changed files found in your project root folder, check your appRootRelativeToGitRepo config');
+            console.log(YELLOW_LOG_ERR, `No changed files found in ${this.config.appRootRelativeToGitRepo} folder, check your appRootRelativeToGitRepo config`);
             console.log('Changed files:', files);
         }
 

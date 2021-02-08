@@ -1,0 +1,24 @@
+{
+  "appRootRelativeToGitRepo": "test-app/src",
+  "excludeKeywords": [
+    "// skip-coverage-check",
+    "backbone"
+  ],
+  "featureNameRegExp": {
+    "body": "APP-123",
+    "flags": "g"
+  },
+  "excludeFiles": [ "-test.js", "test.ts", ".css", ".yml"],
+  "addedFilesQualityGate": {
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100
+  },
+  "changedFilesQualityGate": {
+    "statements": 80,
+    "branches": 80,
+    "functions": 80,
+    "lines": 80
+  }
+}

@@ -19,21 +19,19 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Checkout Test repository
-      uses: actions/checkout@v2
-      with:
-        repository: vitaliyshvarz/vue_coverage_test_app
-        ref: master
-        path: vue_coverage_test_app
-    - name: Install dependencies in test repo
-      run: cd vue_coverage_test_app && npm install
-    - name: Link local to jest-coverage-guard
+
+    - name: Install dependencies in test app
+      run: cd test-app && npm install
+
+    - name: Copy src folder to test app node_modules
       run: |
-        npm link
-        cd vue_coverage_test_app
-        npm link jest-coverage-guard
+        rm -rf test-app/node_modules/jest-coverage-guard/src
+        cp -r src test-app/node_modules/jest-coverage-guard/src
+    - name: Change branch to APP-123
+      run: | 
+        git checkout feature/APP-123_add_testing
     - name: Run tests in test app
-      run: cd vue_coverage_test_app && npm run test:unit
+      run: cd test-app && npm run test:unit
       env:
         APP_ROOT_PATH: ./
-        
+        IN_COVERAGE_TEST_ACTION: true
