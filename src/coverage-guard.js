@@ -10,7 +10,7 @@ const {
 } = require('./utils');
 const {
     YELLOW_LOG_ERR,
-    RED_BG_LOG_ERR,
+    RED_LOG_ERR,
     GREEN_LOG_ERR,
     BLUE_LOG_ERR
 } = require('./constants');
@@ -158,10 +158,10 @@ class CoverageGuard {
 
     finalizeCoverage() {
         if (this.errorTable.containsErrors) {
-            console.error(RED_BG_LOG_ERR, '\n You failed coverage!');
+            console.error(RED_LOG_ERR, '\n You failed coverage!');
 
             // we should fail only if not in watch mode
-            if (!this.isWatchMode) {
+            if (!this.isWatchMode && !process.env.IN_COVERAGE_TEST_ACTION) {
                 process.exit(1, 'Coverage quality gate failed');
             }
         } else {

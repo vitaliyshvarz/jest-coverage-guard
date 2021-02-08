@@ -1,4 +1,4 @@
-const { BLUE_BG_LOG_ERR } = require('./constants');
+const { BLUE_LOG_ERR } = require('./constants');
 /*eslint no-console: 0 */
 class ResultObject {
     constructor(statements, branches, functions, lines) {
@@ -25,12 +25,12 @@ class ResultsTable {
     }
 
     show() {
-        console.log(BLUE_BG_LOG_ERR, 'Your UNCOMITTED changed files coverage results:');
+        console.log(BLUE_LOG_ERR, 'Your UNCOMITTED changed files coverage results:');
         console.table(this.table);
     }
 
     showCommited() {
-        console.log(BLUE_BG_LOG_ERR, 'Coverage quality on comitted files:');
+        console.log(BLUE_LOG_ERR, 'Coverage quality on comitted files:');
         console.table(this.table);
     }
 }
