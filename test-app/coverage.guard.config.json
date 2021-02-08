@@ -1,5 +1,5 @@
 {
-  "appRootRelativeToGitRepo": "src",
+  "appRootRelativeToGitRepo": "test-app/src",
   "excludeKeywords": [
     "// skip-coverage-check",
     "backbone"
