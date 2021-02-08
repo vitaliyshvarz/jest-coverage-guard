@@ -27,7 +27,7 @@
 </div>
 
 <p align="center">
-  <a href="https://github.com/vitaliyshvarz/jest-coverage-guard/pull/2/checks?check_run_id=1854108607#step:7:38">Example fail  result in Git Actions</a>
+  <a href="https://github.com/vitaliyshvarz/jest-coverage-guard/pull/2/checks?check_run_id=1854174888#step:7:66">Example result in Git Actions</a>
 </p>
 
 ## Usage
