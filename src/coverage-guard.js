@@ -201,6 +201,9 @@ class CoverageGuard {
     }
 
     getBranchNameCI() {
+        if (process.env.IN_COVERAGE_TEST_ACTION) {
+            return 'feature/APP-123_add_testing';
+        }
         // gitLab
         if (process.env.CI_COMMIT_REF_NAME) {
             return process.env.CI_COMMIT_REF_NAME;
