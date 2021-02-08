@@ -158,10 +158,10 @@ class CoverageGuard {
 
     finalizeCoverage() {
         if (this.errorTable.containsErrors) {
-            console.log('\x1b[31m', '\n You failed coverage!');
+            console.log(RED_LOG_ERR, 'You failed coverage!');
 
             if (process.env.IN_COVERAGE_TEST_ACTION) {
-                console.log('\x1b[36m', '\n Succeding this task because you are in test jest-coverage-guard CI test environment');
+                console.log(GREEN_LOG_ERR, 'Succeding this task because you are in test jest-coverage-guard CI test environment');
             }
 
             // we should fail only if not in watch mode
