@@ -97,4 +97,8 @@ export default {
       grid-template-columns: 1fr;
     }
   }
+
+  .test-class {
+    text-align: center;
+  }
 </style>
