@@ -88,7 +88,7 @@ class CoverageGuard {
             return;
         }
 
-        console.log(BLUE_LOG_ERR, `Getting files from ${this.commitHashes.length} commits for feature: ${this.currentTicketNumber}`);
+        console.log(BLUE_LOG_ERR, `Getting files changed in ${this.commitHashes.length} commits for ticket id: ${this.currentTicketNumber}`);
         console.log('Files changed in these commits:\n', allChangedFiles);
 
         if (!allChangedFiles) {
@@ -158,7 +158,11 @@ class CoverageGuard {
 
     finalizeCoverage() {
         if (this.errorTable.containsErrors) {
-            console.error(RED_LOG_ERR, '\n You failed coverage!');
+            console.log(RED_LOG_ERR, '\n You failed coverage!');
+
+            if (process.env.IN_COVERAGE_TEST_ACTION) {
+                console.log(YELLOW_LOG_ERR, '\n Succeding this task because you are in test jest-coverage-guard CI test environment');
+            }
 
             // we should fail only if not in watch mode
             if (!this.isWatchMode && !process.env.IN_COVERAGE_TEST_ACTION) {

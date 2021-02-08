@@ -1,7 +1,7 @@
 const YELLOW_LOG_ERR = '\x1b[33m%s\x1b[0m';
 const RED_BG_LOG_ERR = '\x1b[41m%s\x1b[0m';
 const RED_LOG_ERR = '\x1b[31m%s\x1b[0m';
-const BLUE_LOG_ERR = "\x1b[34m";
+const BLUE_LOG_ERR = '\x1b[34m';
 const GREEN_LOG_ERR = '\x1b[32m%s\x1b[0m';
 const BLUE_BG_LOG_ERR = '\x1b[44m%s\x1b[0m';
 
