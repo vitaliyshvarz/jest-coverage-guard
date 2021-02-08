@@ -54,17 +54,7 @@ class CoverageGuard {
         // get all commits containing current ticket number on current branch
         let commits;
         try {
-            await git().stash();
-
-            const commitsBla = await git().pull('origin', 'fail_example', { '--rebase': 'true' });
-
-            await git().stash(['apply']);
             commits = await git().log(['--grep=' + this.currentTicketNumber + '', '--first-parent']);
-            
-            
-            console.log('commits', commits);
-            console.log('commitsBla', commitsBla);
-
         } catch (error) {
             console.warn('No commits found', error);
             return;
@@ -72,8 +62,6 @@ class CoverageGuard {
 
         // save commit hashes from commits with current ticketnumber
         this.setCommitHashes(commits);
-
-        console.log('this.commitHashes', this.commitHashes);
 
         let allChangedFiles;
 
@@ -231,11 +219,12 @@ class CoverageGuard {
 
     getTicketNumberCI() {
         const branch = this.getBranchNameCI();
-        console.log('Looking for commits on branch', branch);
         const { featureNameRegExp } = this.config;
-        console.log('featureNameRegExp', featureNameRegExp);
         const regExp = new RegExp(featureNameRegExp.body, featureNameRegExp.flags);
         const ticketNumberMatches = branch.match(regExp);
+
+        console.log('Looking for commits on branch', branch);
+
         return ticketNumberMatches !== null && ticketNumberMatches.length && ticketNumberMatches[0];
     }
 
