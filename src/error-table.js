@@ -1,4 +1,4 @@
-const { RED_LOG_ERR, YELLOW_LOG_ERR } = require('./constants');
+const { RED_LOG_ERR, YELLOW_LOG_ERR, RESET_COLOR } = require('./constants');
 /*eslint no-console: 0 */
 class ErrorObject {
     constructor(error) {
@@ -81,7 +81,7 @@ class ErrorTable {
 
     showCommited() {
         if (this.tables.length > 0) {
-            console.log(RED_LOG_ERR, 'Coverage quality gate in previous commits failed');
+            console.log(RED_LOG_ERR, 'Coverage quality gate in previous commits failed', RESET_COLOR);
 
             this.tables.forEach((table) => {
                 console.table(table);
