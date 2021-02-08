@@ -46,7 +46,7 @@ class ErrorTable {
         }
 
         if (fileCoverageFailed) {
-            newErrorTable[`${filePath} `] = new ErrorObject();
+            newErrorTable[`${filePath} `] = new ErrorObject('');
 
             if (statementsError) {
                 newErrorTable['statements'] = new ErrorObject(statementsError);
