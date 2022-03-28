@@ -1,15 +1,15 @@
 
 # Jest Coverage Guard
 
-### Check code coverage only in files you change
+### Check code coverage only in files you commit and/or change
 
-#### Perfect Use case: **Enforce code coverage for legacy uncovered code**
+#### Perfect Use case: **Enforce test coverage for legacy untested code**
 ---
  
-> Coverage quality guard will fail your tests if coverage in changed files is below defined threshold.  
+> Coverage quality guard will will go over files you have changed and check if the file test coverage complies with defined threshold.  
 >  - Works in GitHub Actions and GitLab Pipelines
->  - In CI environment checks files found in commits containing `featureNameRegExp` in message
->  - Locally checks both commited and uncommited files in commits containing `featureNameRegExp` in message
+>  - In CI environment checks files found in commits containing `featureNameRegExp` in commit message
+>  - Locally checks both commited files containing `featureNameRegExp` in commit message and uncommited files
 
 <p align="center">
   Example result for uncommited Files (process.env.CI != true)
@@ -81,7 +81,7 @@
 2. In your jest config file `jest.config.json` add jest-coverage-guard as a reporter:
     `"reporters": ["default", "jest-coverage-guard"],`
 
-3. Make sure that in your CI, you have process.env.CI test to true, to check commited files
+3. Make sure in your CI, you have process.env.CI is true, to check commited files
 
 4. Run jest tests and see the output
 
@@ -123,9 +123,7 @@
 > This script should be executed only after jest generated the coverage report, so as jest custom reporter.  
 > This script with check your committed and uncommitted files.
 
-  Locally the script will check coverage on all files that you have changed and committed
-  implementing current feature and all files that you are currently working with
-  but not yet committed.
+  Locally the script will check coverage on all files that you have changed + committed files where commit message contains `featureNameRegExp`
 
   In CI environment it will check changed files from commits containing `featureNameRegExp` in message
 
@@ -134,11 +132,10 @@
 
 ### How does it work:
 
-  1. The script assumes that you are working with a project management software where you have ticket/issue
-	numbers that are appended or included in every commit message, eg: "APP-12345: fixed typo in awesomefile.js"
+  1. The script expects you to prefix each commit message eg: "APP-12345: fixed typo in awesomefile.js"
   2. Script gets the name of the current branch (config: featureNameRegExp)
-  3. Extracts the ticket number from the branch name eg. APP-12345 (config: featureNameRegExp)
-  4. Gets all commits that contain this ticket number in the commit message.
+  3. Extracts the feature-prefix from the branch name eg. APP-12345 (config: featureNameRegExp)
+  4. Gets all commits that contain this feature-prefix in the commit message.
   5. Gets all url's of the files you have changed in those commits.
   6. Filters file URL's to get only app files (config: appRootRelativeToGitRepo) and skips files that contain exclude keywords (config: excludeKeywords).
   7. Finds report for each file from jest coverage report object.
