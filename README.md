@@ -3,7 +3,7 @@
 
 ### Check code coverage only in files you commit and/or change
 
-#### Perfect Use case: **Enforce test coverage for legacy untested code**
+#### Perfect use-case: **enforcing test coverage for legacy untested code**
 ---
  
 > Coverage quality guard will go over files you have changed and check if the file test coverage complies with defined threshold.  
@@ -119,35 +119,36 @@
 
 ## Why use it?
 
-> You can use this to fail your CI pipeline when code coverage is not high enough.  
+> You can use this to fail your CI pipeline when code coverage in files you changed is not high enough.  
 > This script should execute only after jest generated coverage report, so as jest custom reporter.  
 > This script is able to check your committed and uncommitted files.
 
   Locally the script will check coverage on all files that you have changed + committed files where commit message contains `featureNameRegExp`
 
-  In CI environment it will check changed files from commits containing `featureNameRegExp` in message
+  In CI environment it will check changed files from commits containing `featureNameRegExp` in commit message
 
-  If for some reason you want to exclude your file from coverage check,
-  add a comment to your file with "skip-coverage-check", eg. `// skip-coverage-check` (it should be in excludeKeywords config).
+  If for some reason, you want to exclude your file from coverage check, add a comment to your file with "skip-coverage-check", 
+  eg. `// skip-coverage-check` (it should be in excludeKeywords config).
 
 ### How does it work:
 
-  1. The script expects you to prefix each commit message eg: "APP-12345: fixed typo in awesomefile.js"
-  2. Script gets the name of the current branch (config: featureNameRegExp)
-  3. Extracts the feature-prefix from the branch name eg. APP-12345 (config: featureNameRegExp)
-  4. Gets all commits that contain this feature-prefix in the commit message.
-  5. Gets all url's of the files you have changed in those commits.
-  6. Filters file URL's to get only app files (config: appRootRelativeToGitRepo) and skips files that contain exclude keywords (config: excludeKeywords).
-  7. Finds report for each file from jest coverage report object.
-  8. Compares the results with corresponding quality gate mask.
-  9. Adds results to results table.
-  10. Adds failed coverage errors to the errors table.
-  11. Shows the result tables.
-  12. If error table contains errors - the script fails with exit `code 1`.
-  13. If error table contains errors but you are in `--watch` or `--watchAll` mode - script will not fail.
-  14. If error table contains no errors - script will succeed.
+  - The script expects you to prefix each commit message eg: `APP-12345: fixed typo in awesomefile.js`
+  - The script expects you to prefix your branch name with same prefix that you will use in your commits, eg: `patch/APP-12345_feature_one`
+  ---
+  1. Script gets the name of the current branch (config: `featureNameRegExp`)
+  2. Extracts the feature-prefix from the branch name eg. APP-12345 (config: `featureNameRegExp`)
+  3. Gets all commits that contain this feature-prefix in the commit message.
+  4. Gets all url's of the files you have changed in those commits.
+  5. Filters file URL's to get only app files (config: `appRootRelativeToGitRepo`) and skips files that contain exclude keywords (config: `excludeKeywords`).
+  6. Finds report for each file from jest coverage report object.
+  7. Compares the results with corresponding quality gate (config: `changedFilesQualityGate` or `addedFilesQualityGate`).
+  8. Adds covearge results to results table, adds failed coverage errors to the errors table.
+  9. Shows results
+  10. If error table contains errors - the script fails with exit `code 1`.
+  11. If error table contains errors but you are in `--watch` or `--watchAll` mode - script will not fail.
+  12. If error table contains no errors - script will succeed.
 
-  		NEXT STEPS ONLY WHEN (process.env.CI != true):
-  15. Gets current git.status Object.
-  16. Gets all files that you have changed but not yet committed.
-  17. Gets file URL's and then does everything from step 6 to step 15.
+  		NEXT STEPS ONLY WHEN (`process.env.CI != true`):
+  13. Gets current git.status Object.
+  14. Gets all files that you have changed but not yet committed.
+  15. Gets file URL's and then does everything from step 6 to step 15.
